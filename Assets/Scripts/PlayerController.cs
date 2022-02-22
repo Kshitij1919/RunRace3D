@@ -15,10 +15,12 @@ public class PlayerController : MonoBehaviour
     public float gravity;
     private bool doubleJump;
     private bool wallSlide;
+    private Animator animator;
 
     private void Awake()
     {
             characterController = GetComponent<CharacterController>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Start()
@@ -33,25 +35,47 @@ public class PlayerController : MonoBehaviour
 
         if (characterController.isGrounded)
         {
+            
             wallSlide = false;
             playerVelocity = 0f;
             jump();
         }
-        else
+
+        if (!wallSlide)
         {
+            //animator.SetBool("WallSlide", true);
+            print(" wall slide");
             gravity = 30f;
             playerVelocity -= gravity * Time.deltaTime;
-
-            if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && doubleJump)
-            {
-                print("Jump!");
-                playerVelocity += playerJumpForce * 0.5f;
-                doubleJump = false;
-                print("DoubleJump!!");
-            }
-
-            
         }
+        else
+        {
+            
+            //print("wallslide");
+            //gravity = 15f;
+            playerVelocity -= gravity * Time.deltaTime * 0.5f;
+        }
+
+
+        animator.SetBool("Grounded", characterController.isGrounded);
+        animator.SetBool("WallSlide", wallSlide);
+
+        //else
+        //{
+        //    gravity = 30f;
+        //    playerVelocity -= gravity * Time.deltaTime;
+
+        //    //this logic is for double jump, will activate if required
+        //    //if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && doubleJump)
+        //    //{
+        //    //    print("Jump!");
+        //    //    playerVelocity += playerJumpForce * 0.5f;
+        //    //    doubleJump = false;
+        //    //    print("DoubleJump!!");
+        //    //}
+
+
+        //}
 
 
         playerMove.Normalize();
@@ -70,6 +94,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
+            animator.SetTrigger("Jump");
            // wallSlide = false;
             print("Jump!");
             playerVelocity = playerJumpForce;
@@ -90,10 +115,11 @@ public class PlayerController : MonoBehaviour
             {
                 if (playerVelocity < 0f)
                 {
+                    animator.SetBool("WallSlide", true);
                     print("Sliding");
                     wallSlide = true;
                 }
-                else if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+                else if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) // need to fix the logic according to our game progress
                 {
                     //jump();
                     playerVelocity = playerJumpForce;
