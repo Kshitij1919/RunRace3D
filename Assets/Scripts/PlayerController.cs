@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public float playerJumpForce;
     public float playerVelocity = 0;
     public float gravity;
+    private bool doubleJump;
+    private bool wallSlide;
 
     private void Awake()
     {
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
         if (characterController.isGrounded)
         {
+            wallSlide = false;
             playerVelocity = 0f;
             jump();
         }
@@ -38,6 +41,16 @@ public class PlayerController : MonoBehaviour
         {
             gravity = 30f;
             playerVelocity -= gravity * Time.deltaTime;
+
+            if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && doubleJump)
+            {
+                print("Jump!");
+                playerVelocity += playerJumpForce * 0.5f;
+                doubleJump = false;
+                print("DoubleJump!!");
+            }
+
+            
         }
 
 
@@ -57,12 +70,42 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
+           // wallSlide = false;
             print("Jump!");
             playerVelocity = playerJumpForce;
+            //doubleJump = true;
+            //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 180f, transform.eulerAngles.z);
         }
         
 
 
         
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (!characterController.isGrounded)
+        {
+            if (hit.collider.tag == "Wall")
+            {
+                if (playerVelocity < 0f)
+                {
+                    print("Sliding");
+                    wallSlide = true;
+                }
+                else if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+                {
+                    //jump();
+                    playerVelocity = playerJumpForce;
+                    transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 180f, transform.eulerAngles.z);
+                    doubleJump = false;
+                    wallSlide = false;
+                }
+                
+                 
+                
+
+            }
+        }
     }
 }
