@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public float gravity;
     private bool doubleJump;
     private bool wallSlide;
+    private bool playerTurn;
     private Animator animator;
 
     private void Awake()
@@ -39,6 +40,11 @@ public class PlayerController : MonoBehaviour
             wallSlide = false;
             playerVelocity = 0f;
             jump();
+            if (playerTurn)
+            {
+                playerTurn = false;
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 180f, transform.eulerAngles.z);
+            }
         }
 
         if (!wallSlide)
@@ -128,15 +134,27 @@ public class PlayerController : MonoBehaviour
                     wallSlide = false;
                 }
                 
+                
                  
                 
 
             }
         }
 
-        if (hit.collider.tag == "finish")
+        //if (hit.collider.tag == "finish")
+        //{
+        //    print("Game Over!!");
+        //}
+
+        else
         {
-            print("Game Over!!");
+            if (transform.forward != hit.collider.transform.right && hit.collider.tag == "Ground" && !playerTurn)
+            {
+                playerTurn = true;
+                print("Player restricted from turning");
+            }
         }
+
+        
     }
 }
