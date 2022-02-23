@@ -133,5 +133,10 @@ public class PlayerController : MonoBehaviour
 
             }
         }
+
+        if (hit.collider.tag == "finish")
+        {
+            print("Game Over!!");
+        }
     }
 }
