@@ -39,7 +39,13 @@ public class PlayerController : MonoBehaviour
             
             wallSlide = false;
             playerVelocity = 0f;
-            jump();
+
+            if ( Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            {
+                jump();
+            }
+            
+            
             if (playerTurn)
             {
                 playerTurn = false;
@@ -98,15 +104,15 @@ public class PlayerController : MonoBehaviour
 
         
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-        {
+        
+        
             animator.SetTrigger("Jump");
            // wallSlide = false;
             print("Jump!");
             playerVelocity = playerJumpForce;
             //doubleJump = true;
             //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 180f, transform.eulerAngles.z);
-        }
+        
         
 
 
@@ -119,7 +125,7 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.collider.tag == "Wall")
             {
-                if (playerVelocity < 0f)
+                if (playerVelocity < -0.2f)
                 {
                     animator.SetBool("WallSlide", true);
                     print("Sliding");
