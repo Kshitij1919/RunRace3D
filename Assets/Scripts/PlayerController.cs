@@ -125,13 +125,25 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.collider.tag == "Wall")
             {
-                if (playerVelocity < -0.2f)
-                {
-                    animator.SetBool("WallSlide", true);
-                    print("Sliding");
-                    wallSlide = true;
-                }
-                else if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) // need to fix the logic according to our game progress
+                //if (playerVelocity < -0.2f)
+                //{
+                //    animator.SetBool("WallSlide", true);
+                //    print("Sliding");
+                //    wallSlide = true;
+                //}
+                //else if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) // need to fix the logic according to our game progress
+                //{
+                //    //jump();
+                //    playerVelocity = playerJumpForce;
+                //    transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 180f, transform.eulerAngles.z);
+                //    doubleJump = false;
+                //    wallSlide = false;
+                //}
+
+
+
+                
+                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) // need to fix the logic according to our game progress
                 {
                     //jump();
                     playerVelocity = playerJumpForce;
@@ -139,10 +151,16 @@ public class PlayerController : MonoBehaviour
                     doubleJump = false;
                     wallSlide = false;
                 }
-                
-                
-                 
-                
+                else
+                {
+                    animator.SetBool("WallSlide", true);
+                    print("Sliding");
+                    wallSlide = true;
+                }
+
+
+
+
 
             }
         }
