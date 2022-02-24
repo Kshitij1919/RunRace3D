@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
         if (!wallSlide)
         {
             //animator.SetBool("WallSlide", true);
-            print(" wall slide");
+            print(" wall slide off");
             gravity = 30f;
             playerVelocity -= gravity * Time.deltaTime;
         }
