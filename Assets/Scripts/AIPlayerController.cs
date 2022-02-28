@@ -16,7 +16,7 @@ public class AIPlayerController : MonoBehaviour
     private bool AIdoubleJump;
     private bool AIwallSlide;
     private bool AIplayerTurn;
-    private Animator AIanimator;
+    public Animator AIanimator;
     public float timeDelay;
     bool AIjump = true;
 

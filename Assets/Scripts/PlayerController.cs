@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private bool doubleJump;
     private bool wallSlide;
     private bool playerTurn;
-    private Animator animator;
+    public Animator animator;
 
     private void Awake()
     {

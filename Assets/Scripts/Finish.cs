@@ -21,7 +21,17 @@ public class Finish : MonoBehaviour
     {
 
         print(other.gameObject.name);
-        PauseGame();
+        if (other.gameObject.GetComponent<PlayerController>())
+        {
+            print("Player Dance");
+            other.gameObject.GetComponent<PlayerController>().animator.SetTrigger("Dance");
+        }
+        else if (other.gameObject.GetComponent<AIPlayerController>())
+        {
+            print("AI Dance");
+            other.gameObject.GetComponent<AIPlayerController>().AIanimator.SetTrigger("Dance");
+        }
+        //PauseGame();
     }
 
     private void PauseGame()
