@@ -112,6 +112,10 @@ public class AIPlayerController : MonoBehaviour
 
     }
 
+
+    
+
+
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
 
