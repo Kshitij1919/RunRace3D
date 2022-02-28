@@ -54,6 +54,12 @@ public class AIPlayerController : MonoBehaviour
             AIgravity = 30f;
             AIplayerVelocity -= AIgravity * Time.deltaTime;
         }
+
+        if (AIplayerTurn)
+        {
+            AIplayerTurn = false;
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 180f, transform.eulerAngles.z);
+        }
         else
         {
             AIgravity = 10f;
@@ -76,7 +82,7 @@ public class AIPlayerController : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position /*+ new Vector3(0,2f,0)*/, transform.forward, out hit, 10f ))
+        if (Physics.Raycast(transform.position /*+ new Vector3(0,2f,0)*/, transform.forward, out hit, 7f ))
         {
 
             if (hit.collider.tag == "Wall")
@@ -138,10 +144,21 @@ public class AIPlayerController : MonoBehaviour
             //}
 
         }
+
+        else
+        {
+            if (transform.forward != hit.collider.transform.right && hit.collider.tag == "Ground" && !AIplayerTurn)
+            {
+                AIplayerTurn = true;
+                print("Player restricted from turning");
+            }
+        }
     }
 
     IEnumerator AIJumpDelay(float timeDelay)
     {
+        timeDelay = UnityEngine.Random.Range(0.5f,1.0f);
+        print("Time: " + timeDelay);
         //AIplayerTurn = false;
         AIwallSlide = true;
         AIjump = false;

@@ -543,7 +543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6716929614124498549, guid: f212fc2488046554394741ae3c9c083c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6716929614124498550, guid: f212fc2488046554394741ae3c9c083c, type: 3}
       propertyPath: m_RootOrder
@@ -738,11 +738,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 493105754927374702, guid: 937dd4fecf186a04c9f7ad06eaf1b0b8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.7
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 493105754927374702, guid: 937dd4fecf186a04c9f7ad06eaf1b0b8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -36.6
+      value: -35.43
       objectReference: {fileID: 0}
     - target: {fileID: 493105754927374702, guid: 937dd4fecf186a04c9f7ad06eaf1b0b8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2539,10 +2539,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AIspeed: 10
-  AIplayerJumpForce: 20
+  AIplayerJumpForce: 25
   AIplayerVelocity: 0
   AIgravity: 30
-  timeDelay: 0.5
+  timeDelay: 0
 --- !u!143 &6716929612773709534
 CharacterController:
   m_ObjectHideFlags: 0
