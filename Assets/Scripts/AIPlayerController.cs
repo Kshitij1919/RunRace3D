@@ -19,6 +19,7 @@ public class AIPlayerController : MonoBehaviour
     public Animator AIanimator;
     public float timeDelay;
     bool AIjump = true;
+    public string AIname;
 
     private void Awake()
     {
@@ -43,14 +44,14 @@ public class AIPlayerController : MonoBehaviour
 
             RaycastMethod();
 
-            print("Grounded");
+           // print("Grounded");
             AIanimator.SetBool("Grounded",AIcharacterController.isGrounded);
 
         }
         if (!AIwallSlide)
         {
             AIanimator.SetBool("WallSlide", true);
-            print(" wall slide off");
+            //print(" wall slide off");
             AIgravity = 30f;
             AIplayerVelocity -= AIgravity * Time.deltaTime;
         }
@@ -126,7 +127,7 @@ public class AIPlayerController : MonoBehaviour
             if (AIjump)
             {
                 StartCoroutine(AIJumpDelay(timeDelay));
-                print("AIcoroutine Start");
+               // print("AIcoroutine Start");
             }
             //if (AIplayerVelocity < -0.2f)
             //{
@@ -154,7 +155,7 @@ public class AIPlayerController : MonoBehaviour
             if (transform.forward != hit.collider.transform.right && hit.collider.tag == "Ground" && !AIplayerTurn)
             {
                 AIplayerTurn = true;
-                print("Player restricted from turning");
+                //print("Player restricted from turning");
             }
         }
     }

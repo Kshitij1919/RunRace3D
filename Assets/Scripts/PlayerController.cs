@@ -17,6 +17,10 @@ public class PlayerController : MonoBehaviour
     private bool wallSlide;
     private bool playerTurn;
     public Animator animator;
+    public string PlayerName;
+
+    public GameObject PauseMenu;
+    float pausetime;
 
     private void Awake()
     {
@@ -26,13 +30,15 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-            
+        Time.timeScale = 1f;
     }
 
      void Update()
     {
         playerMove = Vector3.zero;
         playerMove = transform.forward;
+
+        
 
         if (characterController.isGrounded)
         {
@@ -56,9 +62,10 @@ public class PlayerController : MonoBehaviour
         if (!wallSlide)
         {
             //animator.SetBool("WallSlide", true);
-            print(" wall slide off");
+            //print(" wall slide off");
             gravity = 30f;
             playerVelocity -= gravity * Time.deltaTime;
+            Debug.Log("Here" + "Velocity: " + playerVelocity + "Deltatime: " + Time.deltaTime);
         }
         else
         {
@@ -94,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
         playerMove *= speed;
         playerMove.y = playerVelocity;
-
+        
         characterController.Move(playerMove * Time.deltaTime);
     }
 
@@ -108,7 +115,7 @@ public class PlayerController : MonoBehaviour
         
             animator.SetTrigger("Jump");
            // wallSlide = false;
-            print("Jump!");
+            //print("Jump!");
             playerVelocity = playerJumpForce;
             //doubleJump = true;
             //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 180f, transform.eulerAngles.z);
@@ -154,7 +161,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     animator.SetBool("WallSlide", true);
-                    print("Sliding");
+                    //print("Sliding");
                     wallSlide = true;
                 }
 
@@ -175,7 +182,7 @@ public class PlayerController : MonoBehaviour
             if (transform.forward != hit.collider.transform.right && hit.collider.tag == "Ground" && !playerTurn)
             {
                 playerTurn = true;
-                print("Player restricted from turning");
+               // print("Player restricted from turning");
             }
         }
 
